@@ -211,8 +211,7 @@ inline int opc_server_set_error(
 		snprintf(
 			extra_info_out,
 			sizeof(extra_info_out),
-			extra_info,
-			__builtin_va_arg_pack()
+			extra_info
 		);
 		snprintf(
 			extra_info_out,
@@ -238,7 +237,7 @@ server_config_t g_server_config = {
 	.tcp_port = 7890,
 	.udp_port = 7890,
 
-	.e131_port = 5568,
+	.e131_port = 0,
 
 	.leds_per_strip = 176,
 	.used_strip_count = LEDSCAPE_NUM_STRIPS,
@@ -959,7 +958,7 @@ int validate_server_config(
 	assert_int_range_inclusive("OPC UDP Port", 1, 65535, input_config->udp_port);
 
 	// e131Port
-	assert_int_range_inclusive("e131 UDP Port", 1, 65535, input_config->e131_port);
+	assert_int_range_inclusive("e131 UDP Port", 0, 65535, input_config->e131_port);
 
 	// lumCurvePower
 	assert_double_range_inclusive("Luminance Curve Power", 0, 10, input_config->lum_power);
